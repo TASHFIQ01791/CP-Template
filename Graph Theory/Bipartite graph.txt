@@ -1,0 +1,53 @@
+// . . . Bismillahir Rahmanir Rahim . . .
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll  long long
+
+vector<ll>v[1000];
+ll vis[1000], col[1000];
+
+bool dfs(ll node, ll c)
+{
+    vis[node]=1;
+    col[node]=c;
+    for(auto child:v[node])
+    {
+        if(vis[child]==0)
+        {
+            if(dfs(child,c^1)==false)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if(col[node]==col[child])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    ll n,e; cin>>n>>e;
+    while(e--)
+    {
+        ll x,y;
+        cin>>x>>y;
+        v[x].push_back(y);
+        v[y].push_back(x);
+    }
+
+    bool ans=dfs(1,1);
+
+    if(ans==true) cout<<"Bipertate"<<endl;
+    else cout<<"Not Bipertate"<<endl;
+}
+
+

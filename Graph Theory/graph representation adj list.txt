@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define PB push_back
+#define yes cout<<"Yes"<<endl;
+#define no cout<<"No"<<endl;
+#define all(X) (X).begin(),(X).end()
+#define Reverse(X) reverse(all(X))
+
+
+#define maxe(A,n)      *max_element(A,A+n)
+#define mine(A,n)      *min_element(A,A+n)
+#define gcd(a,b)       __gcd(a,b)
+#define lcm(a,b)       (a*(b/gcd(a,b)))
+#define Unique(X) (X).erase(unique((X).begin(),(X).end()),(X).end())
+
+
+
+
+int main()
+{
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    ll n,e; cin>>n>>e;
+    vector<ll>ad[11000];
+
+    while(e--)
+    {
+        ll x,y;
+        cin>>x>>y;
+        ad[x].push_back(y);
+        ad[y].push_back(x);
+    }
+
+    for(ll i=1;i<=n;i++)
+    {
+        cout<<i;
+        for(ll j=0;j<ad[i].size();j++) cout<<"->"<<ad[i][j];
+            cout<<endl;
+    }
+}

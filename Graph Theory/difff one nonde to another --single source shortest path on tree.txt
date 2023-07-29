@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define PB push_back
+#define yes cout<<"YES"<<endl;
+#define no cout<<"NO"<<endl;
+#define all(X) (X).begin(),(X).end()
+#define Reverse(X) reverse(all(X))
+
+
+#define maxe(A,n)      *max_element(A,A+n)
+#define mine(A,n)      *min_element(A,A+n)
+#define gcd(a,b)       __gcd(a,b)
+#define lcm(a,b)       (a*(b/gcd(a,b)))
+#define Unique(X) (X).erase(unique((X).begin(),(X).end()),(X).end())
+
+vector<ll>v[1001];
+ll vis[1001] ,dis[1001];
+
+void dfs(ll node,ll d)
+{
+    vis[node]=1;
+    dis[node]=d;
+    for(auto child:v[node])
+    {
+        if(vis[child]==0)
+        {
+            dfs(child,d+1);
+        }
+    }
+}
+
+
+int main()
+{
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    ll n,e;
+    cin>>n>>e;
+    while(e--)
+    {
+        ll x,y;
+        cin>>x>>y;
+        v[x].push_back(y);
+        v[y].push_back(x);
+    }
+
+    ll src; cin>>src;
+
+    dfs(src,0);
+
+    for(ll i=1;i<=n;i++)
+    {
+        cout<<src<<"->"<<i<<" = "<<dis[i]<<endl;
+    }
+
+}
