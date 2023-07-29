@@ -1,0 +1,120 @@
+// ...Bismillah hir Rah manir Rahaim...//
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define PB push_back
+#define yes cout<<"Yes"<<endl;
+#define no cout<<"No"<<endl;
+#define all(X) (X).begin(),(X).end()
+#define Reverse(X) reverse(all(X))
+
+
+#define maxe(A,n)      *max_element(A,A+n)
+#define mine(A,n)      *min_element(A,A+n)
+#define gcd(a,b)       __gcd(a,b)
+#define lcm(a,b)       (a*(b/gcd(a,b)))
+#define Unique(X) (X).erase(unique((X).begin(),(X).end()),(X).end())
+
+const int mx=1e6;
+bool is_prime[mx];
+vector<int>prime;
+
+void seive(int n) // seive of Eratosthenis
+{
+    for(ll i=3;i<=n;i+=2)
+    {
+        is_prime[i]=1;
+    }
+    ll sq=sqrt(n);
+
+    for(ll i=3;i<=sq;i+=2)
+    {
+        if(is_prime[i]==1)
+        {
+            for(ll j=i*i;j<=n;j+=(i+i))
+            {
+                is_prime[j]=0;
+            }
+        }
+    }
+
+    is_prime[2]=1;
+    prime.push_back(2);
+    for(ll i=3;i<=n;i+=2) 
+    {
+        if(is_prime[i]==1) 
+        {
+            prime.push_back(i);
+        }     
+    }
+}
+// ending of seive 
+
+
+//start prime factorization
+
+vector<ll>prime_factorization(ll n)
+{
+    vector<ll>ret;
+    
+    for(auto p:prime)
+    {
+        if(1LL*p*p>n) break;// main part
+
+        if(n%p==0)
+        {
+            while(n%p==0)
+            {
+                ret.push_back(p);
+                n/=p;
+            }
+        }
+    }
+    if(n>1) ret.push_back(n);
+
+    return ret;
+}
+//end prime factorization
+
+
+// Binary Exponentiation( power ber kora)
+
+ll power(ll base,ll pwr)
+{
+    ll res=1;
+    while(pwr)
+    {
+        if(pwr&1)// if odd
+        {
+            res*=base;
+            pwr-=1;
+        }
+        else
+        {
+            base*=base;
+            pwr=pwr>>1;
+        }
+    }
+    return res;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    ll test; cin>>test;
+    while(test--)
+    {
+        seive(1e6);
+        ll n; cin>>n;
+        //seive(n);
+        vector<ll>ans=prime_factorization(n);
+
+        for(auto u:ans)
+        cout<<u<<" ";
+        cout<<endl;
+    }
+}

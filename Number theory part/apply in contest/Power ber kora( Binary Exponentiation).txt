@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define PB push_back
+#define yes cout<<"YES"<<endl;
+//#define no cout<<"NO"<<endl;
+#define all(X) (X).begin(),(X).end()
+#define Reverse(X) reverse(all(X))
+
+
+#define maxe(A,n)      *max_element(A,A+n)
+#define mine(A,n)      *min_element(A,A+n)
+#define gcd(a,b)       __gcd(a,b)
+#define lcm(a,b)       (a*(b/gcd(a,b)))
+#define Unique(X) (X).erase(unique((X).begin(),(X).end()),(X).end())
+
+
+
+ll power(ll base,ll pwr)
+{
+    ll res=1;
+    while(pwr)
+    {
+        if(pwr&1)// if odd
+        {
+            res*=base;
+            pwr-=1;
+        }
+        else
+        {
+            base*=base;
+            pwr=pwr>>1;
+        }
+    }
+    return res;
+}
+
+
+int main()
+{
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll t=1;
+    cin>>t;
+    while(t--)
+    {
+       ll b,p;
+       cin>>b>>p;
+       cout<<power(b,p)<<endl;
+    }
+}
